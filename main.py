@@ -21,7 +21,7 @@ def register_mailtm_account():
         account_button.click()
         time.sleep(2)
     except:
-        print("Не удалось найти кнопку 'Аккаунт', пиздец!")
+        print("Не удалось найти кнопку 'Аккаунт'!")
         driver.quit()
         return
 
@@ -30,7 +30,7 @@ def register_mailtm_account():
         email_element = driver.find_element(By.XPATH, "//p[contains(@class, 'cursor-pointer select-all')]")
         email = email_element.text
     except:
-        print("Не удалось найти email, пиздец!")
+        print("Не удалось найти email!")
         driver.quit()
         return
 
@@ -41,7 +41,7 @@ def register_mailtm_account():
         if not password:
             password = password_element.get_attribute("innerText")
     except:
-        print("Не удалось найти пароль, пиздец!")
+        print("Не удалось найти пароль!")
         driver.quit()
         return
 
@@ -59,4 +59,4 @@ if __name__ == "__main__":
             register_mailtm_account()
             time.sleep(5)
         except Exception as e:
-            print(f"Пиздец, ошибка: {e}")
+            print(f"ошибка: {e}")
