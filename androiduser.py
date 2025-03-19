@@ -34,25 +34,22 @@ def load_existing_agents(filename="user_agents.txt"):
         with open(filename, "r", encoding="utf-8") as f:
             return set(line.strip() for line in f if line.strip())
     except FileNotFoundError:
-        return set()  # Если файла нет, начинаем с пустого множества
+        return set()
 
 
 def save_to_file(num_agents=50000, filename="user_agents.txt"):
     while True:
-        # Загружаем существующие агенты из файла
         existing_agents = load_existing_agents(filename)
         new_agents = set()
 
-        # Генерим новые уникальные агенты, пока не наберем 50k
         while len(new_agents) < num_agents:
-            # 50/50 шанс на Android или iOS
             if random.random() < 0.5:
                 agent = generate_android_user_agent()
             else:
                 agent = generate_ios_user_agent()
             new_agents.add(agent)
 
-        # Добавляем только те, которых еще нет в файле
+
         unique_new_agents = new_agents - existing_agents
         total_new = len(unique_new_agents)
 
@@ -60,15 +57,15 @@ def save_to_file(num_agents=50000, filename="user_agents.txt"):
             with open(filename, "a", encoding="utf-8") as f:
                 for agent in unique_new_agents:
                     f.write(agent + "\n")
-            print(f"Долбанул {total_new} новых уникальных юзер-агентов в {filename}, пиздец!")
-            print(f"Всего в файле теперь: {len(existing_agents) + total_new} строк, сука!")
+            print(f"Долбанул {total_new} новых уникальных юзер-агентов в {filename}!")
+            print(f"Всего в файле теперь: {len(existing_agents) + total_new} строк!")
         else:
-            print("Ни хуя нового не добавил, все агенты уже были, ебаный случай!")
+            print("Ничего не добавлено!")
 
-        print("Жду 120 минут, потом снова пиздец начинается!")
-        time.sleep(7200)  # 120 минут = 7200 секунд
+        print("Жду 120 минут, потом снова начинается!")
+        time.sleep(7200)
 
 
 if __name__ == "__main__":
-    print("Запускаю эту хуйню, один файл, никаких повторов, держись, motherfucker!")
+    print("Запускаю эту  софт, один файл, никаких повторов, держись!")
     save_to_file(50000)
